@@ -78,6 +78,7 @@ class NotesHandler {
   async deleteNoteByIdHandler(request) {
     const { id } = request.params;
     const { id: credentialId } = request.auth.credentials;
+    console.log("🚀 ~ file: handler.js:81 ~ NotesHandler ~ deleteNoteByIdHandler ~ credentialId:", credentialId)
 
     await this._service.verifyNoteOwner(id, credentialId);
     await this._service.deleteNoteById(id);
