@@ -64,7 +64,7 @@ class NotesHandler {
   async putNoteByIdHandler(request, h) {
     this._validator.validateNotePayload(request.payload);
     const { id } = request.params;
-    const { id: credentialId} = request.auth.credentials;
+    const { id: credentialId } = request.auth.credentials;
 
     await this._service.verifyNoteOwner(id, credentialId);
     await this._service.editNoteById(id, request.payload);
@@ -77,6 +77,9 @@ class NotesHandler {
 
   async deleteNoteByIdHandler(request, h) {
     const { id } = request.params;
+    const { id: credentialId } = request.auth.credentials;
+
+    await this._service.verifyNoteOwner(id, credentialId);
     await this._service.deleteNoteById(id);
 
     return {
