@@ -25,6 +25,10 @@ class CacheService {
 
     return result;
   }
+
+  delete(key) {
+    return this._client.del(key);
+  }
 }
 
 module.exports = CacheService;
